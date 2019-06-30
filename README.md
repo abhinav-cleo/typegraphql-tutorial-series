@@ -1,7 +1,6 @@
-# Awesome Project Build with TypeORM
+# Awesome Project with TypeGraphQl and TypeORM
 
 Steps to run this project:
 
-1. Run `npm i` command
-2. Setup database settings inside `ormconfig.json` file
-3. Run `npm start` command
+1. Run `yarn install` command
+2. Run `yarn start` command
