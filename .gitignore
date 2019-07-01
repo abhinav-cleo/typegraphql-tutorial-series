@@ -9,3 +9,5 @@ client/build/
 client/tmp/
 client/temp/
 server/*.gql
+server/package-lock.json
+client/package-lock.json
