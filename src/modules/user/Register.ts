@@ -5,9 +5,9 @@ import { RegisterInput } from "./register/RegisterInput";
 @Resolver()
 export class RegisterResolver {
 
-    @Query(() => String, { name: "registerServiceStatusCheck", nullable: true, description: "Register Service Status" })
-    async registerStatus() {
-        return "Good To Register Some Data";
+    @Query(() => [User], { name: "users", nullable: true, description: "Register Service Status" })
+    async registerStatus(): Promise<User[]>{
+        return User.find()
     }
 
     @Mutation(() => User, { name: "registerUser", nullable: true, description: "Register User" })
