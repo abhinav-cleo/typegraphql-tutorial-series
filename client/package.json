@@ -1,0 +1,9 @@
+{
+  "name": "graphql-client",
+  "version": "1.0.0",
+  "description": "this is the client which will consume the graphql api",
+  "main": "index.js",
+  "repository": "https://github.com/abhinav-cleo/typegraphql-tutorial-series",
+  "author": "Abhinav Nath Gupta",
+  "license": "MIT"
+}
