@@ -17,7 +17,8 @@ const main = async () => {
     });
 
     const apolloServer = new ApolloServer({ 
-        schema
+        schema,
+        playground:true
      });
 
     const app = Express();

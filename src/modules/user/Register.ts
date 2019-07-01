@@ -6,8 +6,13 @@ import { RegisterInput } from "./register/RegisterInput";
 export class RegisterResolver {
 
     @Query(() => [User], { name: "users", nullable: true, description: "Register Service Status" })
-    async registerStatus(): Promise<User[]>{
+    async getUsers(): Promise<User[]>{
         return User.find()
+    }
+
+    @Query(() => User, { name: "user", nullable: true, description: "Register Service Status" })
+    async getUser(@Arg("email") email:String): Promise<User> {
+        return User.findOne({ where: { email } })
     }
 
     @Mutation(() => User, { name: "registerUser", nullable: true, description: "Register User" })
