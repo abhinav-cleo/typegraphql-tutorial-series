@@ -1,0 +1,16 @@
+<div>
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+    <tr>
+      <th class="mdl-data-table__cell--non-numeric">Email</th>
+      <th class="mdl-data-table__cell--non-numeric">Name</th>
+      
+    </tr>
+    <tr *ngFor="let user of users">
+      <td class="mdl-data-table__cell--non-numeric">{{user.email}}</td>
+      <td class="mdl-data-table__cell--non-numeric">{{user.name}}</td>
+    </tr>
+  </table>
+</div>
