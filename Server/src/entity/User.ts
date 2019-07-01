@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { ObjectType, Field, ID, Root } from "type-graphql";
 
 @ObjectType()
@@ -18,7 +18,7 @@ export class User extends BaseEntity {
     lastName: string;
 
     @Field()
-    @Column("text",{unique:true})
+    @Column({unique:true})
     email: string;
 
     @Field()
@@ -29,4 +29,32 @@ export class User extends BaseEntity {
     @Column()
     password:string;
 
+    @Field()
+    @Column()
+    title: string | null;
+
+
+    @Field()
+    @Column()
+    company: string | null;
+
+
+    @Field()
+    @CreateDateColumn()
+    created: Date;
+
+    @Field()
+    @Column()
+    registration_status: string;
+
+    @Field()
+    @Column({
+        nullable: false,
+        default: () => "true"
+    })
+    is_enabled: boolean;
+
+    @Field()
+    @UpdateDateColumn()
+    updated: Date;
 }

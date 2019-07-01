@@ -19,12 +19,16 @@ export class RegisterResolver {
     async registerUser(
         @Arg("input") input: RegisterInput
     ): Promise<User> {
-        const {firstName, lastName, email, password} = input;
+        const {firstName, lastName, email, password, title, company, is_enabled, registration_status} = input;
         const hashedPassword = await bcrypt.hash(password,12);
         const user = await User.create({
             firstName,
             lastName,
             email,
+            title,
+            company,
+            is_enabled,
+            registration_status,
             password:hashedPassword
         }).save();
         return user;

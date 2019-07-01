@@ -11,3 +11,8 @@ client/temp/
 server/*.gql
 server/package-lock.json
 client/package-lock.json
+.DS_Store
+Server/.DS_Store
+Server/**/.DS_Store
+client/.DS_Store
+client/**/.DS_Store
