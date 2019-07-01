@@ -5,7 +5,7 @@ import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 
 import { ServerStatus } from "./modules/server/ServerStatus";
-import { RegisterResolver } from "./modules/user/Register";
+import { RegisterResolver } from "./modules/user/RegisterResolver";
 
 
 const main = async () => {
