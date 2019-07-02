@@ -1,5 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { ObjectType, Field, ID, Root } from "type-graphql";
+import * as jwt from "jsonwebtoken";
+import {UserHelpers} from "../modules/user/UserHelpers";
 
 @ObjectType()
 @Entity()
@@ -24,6 +26,13 @@ export class User extends BaseEntity {
     @Field()
     name(@Root() parent: User): String {
         return `${parent.firstName} ${parent.lastName}`;
+    }
+
+    @Field()
+    token(@Root() parent: User): String {
+        return jwt.sign(JSON.parse(JSON.stringify(parent)), UserHelpers.JWT_SECRET, {
+            expiresIn: Math.floor(Date.now() / 1000) + (60 * 60),
+        });
     }
 
     @Column()

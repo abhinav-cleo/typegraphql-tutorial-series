@@ -16,3 +16,5 @@ Server/.DS_Store
 Server/**/.DS_Store
 client/.DS_Store
 client/**/.DS_Store
+Server/yarn.lock
+Server/yarn-error.log
