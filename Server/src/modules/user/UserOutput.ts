@@ -3,7 +3,7 @@ import {Field, InputType} from "type-graphql";
 import {isEmailAlreadyExist} from "./isEmailAlreadyExist";
 
 @InputType()
-export class UserInput {
+export class UserOutput {
     @Field()
     @Length(1,30)
     firstName: string;
@@ -35,5 +35,5 @@ export class UserInput {
     is_enabled: boolean;
 
     @Field()
-    password?: string;
+    token?: string;
 }
