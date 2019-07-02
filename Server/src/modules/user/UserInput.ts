@@ -3,7 +3,7 @@ import { InputType, Field } from "type-graphql";
 import { isEmailAlreadyExist } from "./isEmailAlreadyExist";
 
 @InputType()
-export class RegisterInput {
+export class UserInput {
     @Field()
     @Length(1,30)
     firstName: string;

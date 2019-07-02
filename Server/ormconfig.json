@@ -2,7 +2,7 @@
    "name":"default",
    "type": "postgres",
    "host": "192.168.99.100",
-   "port": 32777,
+   "port": 32768,
    "username": "postgres",
    "password": "mysecretpassword",
    "database": "postgres",
