@@ -1,9 +1,10 @@
-import {Resolver, Query, Mutation, Arg} from "type-graphql";
+import {Resolver, Query, Mutation, Arg, Ctx} from "type-graphql";
 import { GraphQLError } from 'graphql';
 import bcrypt from "bcryptjs";
 import {User} from "../../entity/User";
 import {UserInput} from "./UserInput";
 import {UserValidationInput} from "./UserValidationInput";
+import {Context} from "apollo-server-core/dist/types";
 
 const HASH_SALT = 12;
 
@@ -22,7 +23,8 @@ export class UserResolver {
 
     @Mutation(() => User, {name: "registerUser", nullable: true, description: "Register A User"})
     async registerUser(
-        @Arg("input") input: UserInput
+        @Arg("input") input: UserInput,
+        @Ctx() ctx: Context
     ): Promise<User> {
         const {firstName, lastName, email, password, title, company, is_enabled, registration_status} = input;
         const hashedPassword = await bcrypt.hash(password, HASH_SALT);
@@ -41,8 +43,10 @@ export class UserResolver {
 
     @Mutation(() => User, {name: "login", nullable: false, description: "Login as User"})
     async loginUser(
-        @Arg("input") input: UserValidationInput
+        @Arg("input") input: UserValidationInput,
+        @Ctx() ctx: Context
     ): Promise<User> {
+        console.log(`User Info ::: ${JSON.stringify(ctx)}`);
         const {email, password} = input;
         const user = await User.findOne({where: {email}});
         const passwordCheck = bcrypt.compareSync(password, user.password);

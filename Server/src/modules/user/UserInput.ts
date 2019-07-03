@@ -1,9 +1,10 @@
 import {IsBoolean, IsEmail, Length} from "class-validator";
 import {Field, InputType} from "type-graphql";
 import {isEmailAlreadyExist} from "./isEmailAlreadyExist";
+import {User} from "../../entity/User";
 
-@InputType()
-export class UserInput {
+@InputType({ description: "Register New User" })
+export class UserInput implements Partial<User> {
     @Field()
     @Length(1,30)
     firstName: string;
