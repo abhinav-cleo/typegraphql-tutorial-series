@@ -1,4 +1,4 @@
-import {Resolver, Query, Mutation, Arg, Ctx} from "type-graphql";
+import {Resolver, Query, Mutation, Arg, Ctx, Authorized} from "type-graphql";
 import { GraphQLError } from 'graphql';
 import bcrypt from "bcryptjs";
 import {User} from "../../entity/User";
@@ -11,11 +11,13 @@ const HASH_SALT = 12;
 @Resolver()
 export class UserResolver {
 
+    @Authorized()
     @Query(() => [User], {name: "users", nullable: true, description: "Get All Users"})
     async getUsers(): Promise<User[]> {
         return User.find()
     }
 
+    @Authorized()
     @Query(() => User, {name: "user", nullable: true, description: "Get User By Email"})
     async getUser(@Arg("email") email: String): Promise<User> {
         return User.findOne({where: {email}})

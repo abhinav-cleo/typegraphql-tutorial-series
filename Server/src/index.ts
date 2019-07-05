@@ -6,6 +6,7 @@ import {createConnection} from "typeorm";
 
 import {ServerStatus} from "./modules/server/ServerStatus";
 import {UserResolver} from "./modules/user/UserResolver";
+import {customAuthChecker} from "./modules/authChecker/custom-auth-checker";
 
 
 const main = async () => {
@@ -13,12 +14,14 @@ const main = async () => {
     const PORT = 4000;
     const schema = await buildSchema({
         resolvers: [ServerStatus, UserResolver],
+        authChecker:customAuthChecker,
         emitSchemaFile: "schema.gql",
     });
 
     const apolloServer = new ApolloServer({
         schema,
-        playground: true
+        playground: true,
+        context: ({ req }: any) => ({ req })
     });
 
     const app = Express();
