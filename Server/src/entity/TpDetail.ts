@@ -1,8 +1,8 @@
-import {BaseEntity,Column,Entity,Index,JoinColumn,JoinTable,ManyToMany,ManyToOne,OneToMany,OneToOne,PrimaryColumn,PrimaryGeneratedColumn,RelationId} from "typeorm";
+import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {AppRef} from "./AppRef";
 import {Integration} from "./Integration";
 import {TpUserAccess} from "./TpUserAccess";
-import { ObjectType, ID, Field } from "type-graphql";
+import {Field, ID, ObjectType} from "type-graphql";
 
 
 @ObjectType()

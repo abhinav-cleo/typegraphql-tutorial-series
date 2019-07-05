@@ -7,13 +7,14 @@ import {createConnection} from "typeorm";
 import {ServerStatus} from "./modules/server/ServerStatus";
 import {UserResolver} from "./modules/user/UserResolver";
 import {customAuthChecker} from "./modules/authChecker/custom-auth-checker";
+import {TradingPartnerResolver} from "./modules/tradingPartner/TradingPartnerResolver";
 
 
 const main = async () => {
     await createConnection();
     const PORT = 4000;
     const schema = await buildSchema({
-        resolvers: [ServerStatus, UserResolver],
+        resolvers: [ServerStatus, UserResolver, TradingPartnerResolver],
         authChecker:customAuthChecker,
         emitSchemaFile: "schema.gql",
     });
