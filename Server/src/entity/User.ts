@@ -24,15 +24,8 @@ export class User extends BaseEntity {
     email: string;
 
     @Field()
-    name(@Root() parent: User): String {
+    name(@Root() parent: User): string {
         return `${parent.firstName} ${parent.lastName}`;
-    }
-
-    @Field()
-    token(@Root() parent: User): String {
-        return jwt.sign(JSON.parse(JSON.stringify(parent)), UserHelpers.JWT_SECRET, {
-            expiresIn: Math.floor(Date.now() / 1000) + (60 * 60),
-        });
     }
 
     @Column()
@@ -66,4 +59,7 @@ export class User extends BaseEntity {
     @Field()
     @UpdateDateColumn()
     updated: Date;
+
+    @Field({nullable:true})
+    token: string;
 }

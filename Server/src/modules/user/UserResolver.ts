@@ -5,6 +5,7 @@ import {User} from "../../entity/User";
 import {UserInput} from "./UserInput";
 import {UserValidationInput} from "./UserValidationInput";
 import {Context} from "apollo-server-core/dist/types";
+import {UserHelpers} from "./UserHelpers";
 
 const HASH_SALT = 12;
 
@@ -48,18 +49,12 @@ export class UserResolver {
         @Arg("input") input: UserValidationInput,
         @Ctx() ctx: Context
     ): Promise<User> {
-        console.log(`User Info ::: ${JSON.stringify(ctx)}`);
         const {email, password} = input;
         const user = await User.findOne({where: {email}});
         const passwordCheck = bcrypt.compareSync(password, user.password);
         const userCheck = email === user.email;
-        console.log(`user::: ${JSON.stringify(user)}`);
-        console.log(`passwordCheck::: ${passwordCheck}`);
-        console.log(`userCheck::: ${userCheck}`);
         if(userCheck && passwordCheck){
-            if(user.token){
-                user.token(user)
-            }
+            user.token = UserHelpers.getToken(user);
             return user;
         } else {
             throw new GraphQLError("Invalid User Credentials");

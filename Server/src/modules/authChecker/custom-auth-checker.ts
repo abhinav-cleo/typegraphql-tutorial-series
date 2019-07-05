@@ -2,15 +2,12 @@ import {AuthChecker} from "type-graphql";
 import {CustomContext} from "../customContext/customContext";
 import * as jwt from "jsonwebtoken";
 import {UserHelpers} from "../user/UserHelpers";
+import {GraphQLError} from "graphql";
 
 export const customAuthChecker: AuthChecker<CustomContext> = async (
-    {root, args, context, info}
+    {context}
 ) => {
-    console.log(`root::: ${JSON.stringify(root)}`);
-    console.log(`args::: ${JSON.stringify(args)}`);
-    console.log(`info::: ${JSON.stringify(info)}`);
-    console.log(`context::: ${JSON.stringify(context.req.headers)}`);
-    const bearerHeader = context.req.header('authorization');
+    const bearerHeader = context.req.header('Authorization') || context.req.header('authorization');
     if (!bearerHeader) {
         return false;
     }
@@ -19,12 +16,11 @@ export const customAuthChecker: AuthChecker<CustomContext> = async (
         return false;
     }
 
-    try{
-        const decodedJwtToken = await jwt.verify(token, UserHelpers.JWT_SECRET);
-        console.log(JSON.stringify(decodedJwtToken));
+    try {
+        await jwt.verify(token, UserHelpers.JWT_SECRET);
         return true;
-    }catch (e) {
-        throw new Error('Invalid token');
+    } catch (e) {
+        throw new GraphQLError('Invalid token');
     }
 
 
